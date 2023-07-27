@@ -23,7 +23,7 @@ mongoose.connection.once('open', () => {
     },
     tags: {
       type: String,
-      enum: ['玄幻', '志怪', '滑稽'] // 枚举，类型必须在这几个值中间
+      // enum: ['玄幻', '志怪', '滑稽'] // 枚举，类型必须在这几个值中间
     },
     price: Number,
     is_hot: Boolean
@@ -32,20 +32,17 @@ mongoose.connection.once('open', () => {
   // 6. 创建模型对象（创建集合）mongoose 会使用集合的复数去创建集合，比如集合名是book，执行完之后会自动变成 books
   let BookModel = mongoose.model('books', BookSchema);
 
-  // 7. 读取单条信息
-  // let promise = BookModel.findOne({is_hot: false});
-  // promise.then(data => {
-  //   console.log(data)
-  // })
+  // 价格小于20的图书 lte: 小于等于 gt: 大于 gte: 大于等于 ne 不等于
+  // BookModel.find({ price: { $lt: 29.9 } }).then(data => console.log(data));
 
-  // 根据 id 获取文档
-  // let promise = BookModel.findById('64c1d116655aa7ca26372299');
-  // promise.then(data => {
-  //   console.log(data);
-  // })
+  // 满足某些或 or
+  // BookModel.find({ $or: [{author: '曹雪芹'}, { price: '19.9' }] }).then(data => console.log(data));
 
-  // 读取所有
-  BookModel.find().then(data => console.log(data))
+  // 满足条件且 and
+  // BookModel.find({ $and: [{price: { $gt: 20 }}, {name: '红楼'}] }).then(data => console.log(data))
+
+  // 正则
+  BookModel.find({ name: /水/ }).then(data => console.log(data));
 }) 
 
 // 连接失败的回调

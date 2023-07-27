@@ -23,7 +23,7 @@ mongoose.connection.once('open', () => {
     },
     tags: {
       type: String,
-      enum: ['玄幻', '志怪', '滑稽'] // 枚举，类型必须在这几个值中间
+      // enum: ['玄幻', '志怪', '滑稽'] // 枚举，类型必须在这几个值中间
     },
     price: Number,
     is_hot: Boolean
@@ -31,21 +31,17 @@ mongoose.connection.once('open', () => {
 
   // 6. 创建模型对象（创建集合）mongoose 会使用集合的复数去创建集合，比如集合名是book，执行完之后会自动变成 books
   let BookModel = mongoose.model('books', BookSchema);
+  // 7. 只包含name和author
+  // BookModel.find().select('name author').then(data => console.log(data))
 
-  // 7. 读取单条信息
-  // let promise = BookModel.findOne({is_hot: false});
-  // promise.then(data => {
-  //   console.log(data)
-  // })
+  // 8. 正序排序  -price 是逆序 
+  // BookModel.find().sort('price').then(data => console.log(data))
+  
+  // 9. 连贯使用
+  // BookModel.find().select('price').sort('price').then(data => console.log(data))
 
-  // 根据 id 获取文档
-  // let promise = BookModel.findById('64c1d116655aa7ca26372299');
-  // promise.then(data => {
-  //   console.log(data);
-  // })
-
-  // 读取所有
-  BookModel.find().then(data => console.log(data))
+  // 10. 取出个数，跳过 1 个 取出 2 个
+  BookModel.find().select('price').sort('price').skip(1).limit(2).then(data => console.log(data))
 }) 
 
 // 连接失败的回调

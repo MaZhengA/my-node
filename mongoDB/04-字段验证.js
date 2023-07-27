@@ -47,6 +47,36 @@ mongoose.connection.once('open', () => {
   }).catch(err => {
     console.log(err)
   })
+
+  const arr = [
+    {
+      name: '西游记',
+      author: '吴承恩',
+      tags: '玄幻',
+      price: 19.9
+    },
+    {
+      name: '三国',
+      author: '罗贯中',
+      tags: '历史',
+      price: 29.9
+    },
+    {
+      name: '水浒',
+      author: '施耐庵',
+      tags: '武打',
+      price: 9.9
+    },
+    {
+      name: '红楼',
+      author: '曹雪芹',
+      tags: '言情',
+      price: 39.9
+    }
+  ]
+  
+  // 批量创建
+  BookModel.insertMany(arr).then(data => console.log(data));
 }) 
 
 // 连接失败的回调
