@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table,
+    td {
+      padding: 10px 20px;
+      border-collapse: collapse;
+      border: 1px solid #333;
+    }
+
+    table,
+    tr:nth-child(odd) {
+      background-color: black;
+    }
+
+    table,
+    tr:nth-child(even) {
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <table>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    let tds = document.querySelectorAll('td');
+    tds.forEach((item) => {
+      item.onclick = function () {
+        this.style.background = 'blue'
+      }
+    })
+  </script>
+</body>
+
+</html>
