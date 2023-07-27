@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .account-item {
+      border-bottom: 1px solid #333;
+      margin-bottom: 5px;
+      padding-bottom: 5px;
+    }
+    .remove {
+      color: #333;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>记账本</h2>
+  <hr/>
+  <div class="accounts">
+    <% accounts.forEach(item => { %>
+      <div class="account-item">
+        <div class="title"><%= item.title %></div>
+        <div class="time"><%= item.time %></div>
+        <% if (item.type === '1') { %>
+          <span>收入</span>
+        <% } else { %>
+          <span>支出</span>
+        <% } %>
+        <div class="account">
+          <%= item.account %>
+        </div>
+        <div class="remarks">
+          <%= item.remarks %>
+        </div>
+        <div class="remove">
+          <a href="/account/<%= item.id %>">
+            <span>x</span>
+          </a>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</body>
+</html>
