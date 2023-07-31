@@ -1,12 +1,3 @@
 {
-  "accounts": [
-    {
-      "id": "Lp1Cw5qdV",
-      "title": "学习",
-      "time": "2023-07-27",
-      "type": "-1",
-      "account": "12",
-      "remarks": "2332"
-    }
-  ]
+  "accounts": []
 }
