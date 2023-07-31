@@ -11,9 +11,10 @@ const fs = require('fs');
 // })
 
 // 3. 调用appendFileSync
-fs.appendFileSync('./座右铭.txt', '\r\n温故而知新，可以为师矣')
+// fs.appendFileSync('./座右铭.txt', '\r\n温故而知新，可以为师矣')
 
 // 4. 调用writeFile实现
+// flag: 'a' 表示打开文件进行追加，如果文件不存在，则创建该文件
 fs.writeFile('./座右铭.txt', '\r\n学而不思则罔，思而不学则殆', { flag: 'a' }, err => {
   if (err) {
     console.log('写入失败')
