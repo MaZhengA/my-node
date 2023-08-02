@@ -1,14 +1,18 @@
-var express = require('express');
-var router = express.Router();
-
+const express = require('express');
 const dayjs = require('dayjs');
 const AccountModel = require('../../models/AccountModel');
 
-/* 记账本列表 */
-router.get('/account', function(req, res, next) {
-  // 获取所有的账单信息
-  // let accounts = db.get('accounts').value();
+const router = express.Router();
+// 登陆鉴权
+const checkLoginMiddleware = require('../../middleware/checkLoginMiddleware');
 
+// 添加首页的路由规则
+router.get('/', (req, res) => {
+  res.redirect('/account')
+})
+
+/* 记账本列表 */
+router.get('/account', checkLoginMiddleware, function(req, res, next) {
   // 读取集合信息
   let promise = AccountModel.find().sort({time: -1}).exec();
   promise.then(data => {
@@ -22,7 +26,7 @@ router.get('/account', function(req, res, next) {
 });
 
 // 添加记录
-router.get('/account/create', function(req, res, next) {
+router.get('/account/create', checkLoginMiddleware, function(req, res, next) {
   res.render('create')
 });
 
@@ -48,7 +52,7 @@ router.post('/account', (req, res) => {
 })
 
 // 删除
-router.get('/account/:id', (req, res) => {
+router.get('/account/:id', checkLoginMiddleware, (req, res) => {
   let id = req.params.id;
   // db.get('accounts').remove({id: id}).write();
   let promise = AccountModel.deleteOne({_id: id});

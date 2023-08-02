@@ -42,7 +42,6 @@ router.post('/login', (req, res) => {
     if (!data) {
       return res.send('账号或密码错误')
     }
-    console.log(req.session)
     req.session.username = data.username;
     req.session._id = data._id;
     res.render('success', { msg: '登陆成功', url: '/account' })
@@ -50,6 +49,13 @@ router.post('/login', (req, res) => {
     console.log(err)
     res.status(500).send('登陆失败，请重试~')
     return;
+  })
+})
+
+// 退出登录
+router.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.render('success', { msg: '退出成功', url: '/login' })
   })
 })
 
