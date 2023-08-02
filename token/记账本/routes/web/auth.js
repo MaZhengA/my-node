@@ -38,7 +38,7 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res) => {
   // 查询数据库
   let { username, password } = req.body;
-  UserModel.findOne({ username, password }).then(data => {
+  UserModel.findOne({ username, password: md5(password) }).then(data => {
     if (!data) {
       return res.send('账号或密码错误')
     }
